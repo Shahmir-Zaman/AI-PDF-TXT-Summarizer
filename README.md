@@ -1,1 +1,2 @@
-Vibe-Coded-Full-Stack-App
+AI Summarizer App
+

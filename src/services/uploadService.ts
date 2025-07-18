@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const WEBHOOK_URL = 'https://n8n.shahmirzaman.dev/webhook-test/upload';
+const WEBHOOK_URL = 'https://n8n.shahmirzaman.dev/webhook/upload';
 
 export const uploadFile = async (
   file: File,

@@ -10,9 +10,15 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://disnotsham.app.n8n.cloud',
+        target: 'https://n8n.shahmirzaman.dev',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: true,
+        configure: (proxy, options) => {
+          proxy.on('error', (err, req, res) => {
+            console.log('Proxy error:', err);
+          });
+        },
       },
     },
   },

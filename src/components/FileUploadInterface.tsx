@@ -49,25 +49,25 @@ export const FileUploadInterface: React.FC = () => {
       {/* Upload Zone */}
       {canAddMoreFiles && (
         <div
-          className="border-3 border-dashed border-purple-300 rounded-2xl p-10 text-center hover:border-pink-400 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 transition-all duration-300 cursor-pointer bg-white bg-opacity-90 backdrop-blur-sm shadow-lg hover:shadow-2xl transform hover:scale-105 animate-slide-up"
+          className="border-3 border-dashed border-purple-300 rounded-2xl p-9 text-center hover:border-pink-400 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 transition-all duration-300 cursor-pointer bg-white bg-opacity-90 backdrop-blur-sm shadow-lg hover:shadow-2xl transform hover:scale-105 animate-slide-up"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={handleClick}
         >
-          <Upload className="w-16 h-16 text-purple-500 mx-auto mb-6 animate-bounce" />
-          <h3 className="text-2xl font-bold text-gray-800 mb-3">
+          <Upload className="w-15 h-15 text-purple-500 mx-auto mb-5 animate-bounce" />
+          <h3 className="text-xl font-bold text-gray-800 mb-3">
             🎯 Drop your files here or click to browse
           </h3>
-          <p className="text-purple-600 mb-6 text-lg font-medium">
+          <p className="text-purple-600 mb-5 text-base font-medium">
             Select up to 3 files (PDF or TXT) • Max {3 - files.length} more files ✨
           </p>
-          <div className="flex items-center justify-center space-x-6 text-sm text-gray-600">
-            <div className="flex items-center space-x-2 bg-purple-100 px-4 py-2 rounded-full">
-              <FileText className="w-5 h-5 text-purple-600" />
+          <div className="flex items-center justify-center space-x-5 text-sm text-gray-600">
+            <div className="flex items-center space-x-2 bg-purple-100 px-3 py-2 rounded-full">
+              <FileText className="w-4 h-4 text-purple-600" />
               <span className="font-semibold">PDF</span>
             </div>
-            <div className="flex items-center space-x-2 bg-pink-100 px-4 py-2 rounded-full">
-              <FileText className="w-5 h-5 text-pink-600" />
+            <div className="flex items-center space-x-2 bg-pink-100 px-3 py-2 rounded-full">
+              <FileText className="w-4 h-4 text-pink-600" />
               <span className="font-semibold">TXT</span>
             </div>
           </div>
@@ -97,10 +97,10 @@ export const FileUploadInterface: React.FC = () => {
               <button
                 onClick={uploadAllFiles}
                 disabled={isUploading}
-                className="flex items-center space-x-3 px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 animate-pulse-glow"
+                className="flex items-center space-x-3 px-9 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 animate-pulse-glow"
               >
-                <Send className="w-6 h-6" />
-                <span className="text-lg">🚀 Upload & Process All Files</span>
+                <Send className="w-5 h-5" />
+                <span className="text-base">🚀 Upload & Process All Files</span>
               </button>
             </div>
           )}
@@ -110,10 +110,10 @@ export const FileUploadInterface: React.FC = () => {
             <div className="flex justify-center animate-bounce-in">
               <button
                 onClick={retryAllFiles}
-                className="flex items-center space-x-3 px-10 py-4 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-bold rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+                className="flex items-center space-x-3 px-9 py-3 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-bold rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
               >
-                <Send className="w-6 h-6" />
-                <span className="text-lg">🔄 Retry All Failed Files</span>
+                <Send className="w-5 h-5" />
+                <span className="text-base">🔄 Retry All Failed Files</span>
               </button>
             </div>
           )}

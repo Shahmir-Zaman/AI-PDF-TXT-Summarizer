@@ -37,21 +37,21 @@ export const Results: React.FC = () => {
   }
 
   return (
-    <div className="mt-12 space-y-8 animate-slide-up">
+    <div className="mt-11 space-y-7 animate-slide-up">
       <div className="text-center animate-bounce-in">
         <div className="inline-flex items-center space-x-3 mb-4">
-          <Sparkles className="w-8 h-8 text-white animate-spin" />
+          <Sparkles className="w-7 h-7 text-white animate-spin" />
           <h2 className="text-4xl font-bold text-white drop-shadow-lg">
             🎉 AI Summaries Ready! 🎉
           </h2>
-          <Sparkles className="w-8 h-8 text-white animate-spin" />
+          <Sparkles className="w-7 h-7 text-white animate-spin" />
         </div>
-        <p className="text-white text-lg font-medium drop-shadow-md">
+        <p className="text-white text-base font-medium drop-shadow-md">
           Your documents have been magically transformed into brilliant summaries! ✨
         </p>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-7">
         {completedFiles.map((file, index) => {
           const isExpanded = expandedSummaries.has(file.id);
           return (
@@ -60,14 +60,14 @@ export const Results: React.FC = () => {
               className="bg-white bg-opacity-95 backdrop-blur-sm rounded-3xl shadow-2xl border border-purple-200 overflow-hidden transform hover:scale-105 transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-6">
+              <div className="p-7">
+                <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center space-x-4">
                     <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl">
-                      <FileText className="w-8 h-8 text-purple-600" />
+                      <FileText className="w-7 h-7 text-purple-600" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-800">
+                      <h3 className="text-xl font-bold text-gray-800">
                         📄 {file.file.name}
                       </h3>
                       <p className="text-purple-600 font-semibold flex items-center space-x-1">
@@ -79,14 +79,14 @@ export const Results: React.FC = () => {
                   <div className="flex items-center space-x-3">
                     <button
                       onClick={() => file.summary && copyToClipboard(file.summary)}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-purple-600 hover:text-purple-800 border-2 border-purple-300 rounded-xl hover:bg-purple-50 transition-all duration-300 shadow-md hover:shadow-lg"
+                      className="flex items-center space-x-2 px-3 py-2 text-sm text-purple-600 hover:text-purple-800 border-2 border-purple-300 rounded-xl hover:bg-purple-50 transition-all duration-300 shadow-md hover:shadow-lg"
                     >
                       <Copy className="w-4 h-4" />
                       <span className="font-semibold">📋 Copy</span>
                     </button>
                     <button
                       onClick={() => file.summary && downloadSummary(file.file.name, file.summary)}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                      className="flex items-center space-x-2 px-3 py-2 text-sm text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
                     >
                       <Download className="w-4 h-4" />
                       <span className="font-semibold">💾 Download</span>

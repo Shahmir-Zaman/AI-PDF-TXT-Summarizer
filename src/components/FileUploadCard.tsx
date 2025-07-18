@@ -85,14 +85,14 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
   };
 
   return (
-    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-lg border border-purple-200 p-5 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slide-up">
-      <div className="flex items-start justify-between mb-4">
+    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-lg border border-purple-200 p-4 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slide-up">
+      <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-3">
           <div className="p-2 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl">
-            <FileText className="w-8 h-8 text-purple-600" />
+            <FileText className="w-7 h-7 text-purple-600" />
           </div>
           <div>
-            <h4 className="font-bold text-gray-800 truncate max-w-[200px]">
+            <h4 className="font-bold text-gray-800 truncate max-w-[190px]">
               {file.file.name}
             </h4>
             <p className="text-sm text-purple-600 font-medium">
@@ -104,7 +104,7 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
           onClick={() => removeFile(file.id)}
           className="text-gray-400 hover:text-red-500 transition-colors p-1 hover:bg-red-50 rounded-full"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 
@@ -134,7 +134,9 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           {getStatusIcon()}
-          <span className="text-sm text-gray-700">{getStatusText()}</span>
+          <span className={`text-sm font-medium ${file.status === 'error' ? 'text-red-600' : 'text-gray-700'}`}>
+            {file.status === 'error' ? 'Upload Failed' : getStatusText()}
+          </span>
         </div>
         
         {file.status === 'error' && (
@@ -147,6 +149,23 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
           </button>
         )}
       </div>
+
+      {/* Error Message Display */}
+      {file.status === 'error' && file.error && (
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl animate-slide-up">
+          <div className="flex items-start space-x-2">
+            <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-sm font-medium text-red-800 leading-relaxed">
+                {file.error}
+              </p>
+              <p className="text-xs text-red-600 mt-1">
+                Click retry to try uploading again, or remove this file and try a different one.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

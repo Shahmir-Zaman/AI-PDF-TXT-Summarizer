@@ -12,6 +12,7 @@ const FileUploadContext = createContext<{
   addFile: (file: File) => void;
   removeFile: (id: string) => void;
   retryUpload: (id: string) => void;
+  uploadSingleFile: (id: string) => void;
   retryAllFiles: () => void;
   uploadAllFiles: () => void;
   clearError: () => void;
@@ -134,6 +135,13 @@ export const FileUploadProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   }, [state.files]);
 
+  const uploadSingleFile = useCallback((id: string) => {
+    const file = state.files.find(f => f.id === id);
+    if (file && file.status === 'pending') {
+      uploadFile(file.file, id, dispatch);
+    }
+  }, [state.files]);
+
   const retryAllFiles = useCallback(() => {
     const errorFiles = state.files.filter(file => file.status === 'error');
     
@@ -159,6 +167,7 @@ export const FileUploadProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       addFile,
       removeFile,
       retryUpload,
+      uploadSingleFile,
       retryAllFiles,
       uploadAllFiles,
       clearError,
@@ -179,6 +188,7 @@ export const useFileUpload = () => {
     addFile: context.addFile,
     removeFile: context.removeFile,
     retryUpload: context.retryUpload,
+    uploadSingleFile: context.uploadSingleFile,
     retryAllFiles: context.retryAllFiles,
     uploadAllFiles: context.uploadAllFiles,
     clearError: context.clearError,

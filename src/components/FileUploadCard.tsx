@@ -17,7 +17,7 @@ interface FileUploadCardProps {
 }
 
 export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
-  const { removeFile, retryUpload } = useFileUpload();
+  const { removeFile, retryUpload, uploadSingleFile } = useFileUpload();
 
   const getStatusIcon = () => {
     switch (file.status) {
@@ -139,6 +139,18 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
           </span>
         </div>
         
+        {/* Individual Upload Button */}
+        {file.status === 'pending' && (
+          <button
+            onClick={() => uploadSingleFile(file.id)}
+            className="flex items-center space-x-2 px-4 py-2 text-sm text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 animate-pulse-glow"
+          >
+            <Upload className="w-4 h-4" />
+            <span className="font-semibold">🚀 Upload</span>
+          </button>
+        )}
+        
+        {/* Retry Button */}
         {file.status === 'error' && (
           <button
             onClick={() => retryUpload(file.id)}

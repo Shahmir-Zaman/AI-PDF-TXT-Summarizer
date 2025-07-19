@@ -85,24 +85,24 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
   };
 
   return (
-    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-lg border border-purple-200 p-4 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slide-up">
+    <div className="bg-white dark:bg-slate-800 bg-opacity-95 dark:bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-lg border border-purple-200 dark:border-violet-600 p-4 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slide-up">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl">
-            <FileText className="w-7 h-7 text-purple-600" />
+          <div className="p-2 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 rounded-xl">
+            <FileText className="w-7 h-7 text-purple-600 dark:text-purple-400" />
           </div>
           <div>
-            <h4 className="font-bold text-gray-800 truncate max-w-[190px]">
+            <h4 className="font-bold text-gray-800 dark:text-gray-200 truncate max-w-[190px]">
               {file.file.name}
             </h4>
-            <p className="text-sm text-purple-600 font-medium">
+            <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">
               📄 {formatFileSize(file.file.size)}
             </p>
           </div>
         </div>
         <button
           onClick={() => removeFile(file.id)}
-          className="text-gray-400 hover:text-red-500 transition-colors p-1 hover:bg-red-50 rounded-full"
+          className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 hover:bg-red-50 dark:hover:bg-red-900 rounded-full"
         >
           <X className="w-4 h-4" />
         </button>
@@ -111,12 +111,12 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
       {/* Progress Bar */}
       <div className="mb-4">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-purple-600 font-semibold">✨ Progress</span>
-          <span className="text-sm font-bold text-gray-800 bg-purple-100 px-2 py-1 rounded-full">
+          <span className="text-sm text-purple-600 dark:text-purple-400 font-semibold">✨ Progress</span>
+          <span className="text-sm font-bold text-gray-800 dark:text-gray-200 bg-purple-100 dark:bg-purple-800 px-2 py-1 rounded-full">
             {getProgressPercentage()}%
           </span>
         </div>
-        <div className="w-full bg-purple-100 rounded-full h-3 shadow-inner">
+        <div className="w-full bg-purple-100 dark:bg-purple-800 rounded-full h-3 shadow-inner">
           <div
             className={`h-3 rounded-full transition-all duration-500 ${
               file.status === 'error' 
@@ -134,7 +134,7 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           {getStatusIcon()}
-          <span className={`text-sm font-medium ${file.status === 'error' ? 'text-red-600' : 'text-gray-700'}`}>
+          <span className={`text-sm font-medium ${file.status === 'error' ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300'}`}>
             {file.status === 'error' ? 'Upload Failed' : getStatusText()}
           </span>
         </div>
@@ -164,14 +164,14 @@ export const FileUploadCard: React.FC<FileUploadCardProps> = ({ file }) => {
 
       {/* Error Message Display */}
       {file.status === 'error' && file.error && (
-        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl animate-slide-up">
+        <div className="mt-4 p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-xl animate-slide-up">
           <div className="flex items-start space-x-2">
-            <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+            <XCircle className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-red-800 leading-relaxed">
+              <p className="text-sm font-medium text-red-800 dark:text-red-300 leading-relaxed">
                 {file.error}
               </p>
-              <p className="text-xs text-red-600 mt-1">
+              <p className="text-xs text-red-600 dark:text-red-400 mt-1">
                 Click retry to try uploading again, or remove this file and try a different one.
               </p>
             </div>

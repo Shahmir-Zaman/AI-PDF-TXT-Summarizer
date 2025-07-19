@@ -57,20 +57,20 @@ export const Results: React.FC = () => {
           return (
             <div 
               key={file.id} 
-              className="bg-white bg-opacity-95 backdrop-blur-sm rounded-3xl shadow-2xl border border-purple-200 overflow-hidden transform hover:scale-105 transition-all duration-300"
+              className="bg-white dark:bg-slate-800 bg-opacity-95 dark:bg-opacity-95 backdrop-blur-sm rounded-3xl shadow-2xl border border-purple-200 dark:border-violet-600 overflow-hidden transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="p-7">
                 <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl">
-                      <FileText className="w-7 h-7 text-purple-600" />
+                    <div className="p-3 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 rounded-2xl">
+                      <FileText className="w-7 h-7 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800">
+                      <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
                         📄 {file.file.name}
                       </h3>
-                      <p className="text-purple-600 font-semibold flex items-center space-x-1">
+                      <p className="text-purple-600 dark:text-purple-400 font-semibold flex items-center space-x-1">
                         <Sparkles className="w-4 h-4" />
                         <span>Summary generated successfully!</span>
                       </p>
@@ -79,7 +79,7 @@ export const Results: React.FC = () => {
                   <div className="flex items-center space-x-3">
                     <button
                       onClick={() => file.summary && copyToClipboard(file.summary)}
-                      className="flex items-center space-x-2 px-3 py-2 text-sm text-purple-600 hover:text-purple-800 border-2 border-purple-300 rounded-xl hover:bg-purple-50 transition-all duration-300 shadow-md hover:shadow-lg"
+                      className="flex items-center space-x-2 px-3 py-2 text-sm text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 border-2 border-purple-300 dark:border-purple-600 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900 transition-all duration-300 shadow-md hover:shadow-lg"
                     >
                       <Copy className="w-4 h-4" />
                       <span className="font-semibold">📋 Copy</span>
@@ -97,29 +97,29 @@ export const Results: React.FC = () => {
                 {/* Collapsible Summary Toggle */}
                 <button
                   onClick={() => toggleSummary(file.id)}
-                  className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl hover:from-purple-200 hover:to-pink-200 transition-all duration-300 mb-4 shadow-md hover:shadow-lg"
+                  className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-violet-800 dark:to-purple-800 rounded-2xl hover:from-purple-200 hover:to-pink-200 dark:hover:from-violet-700 dark:hover:to-purple-700 transition-all duration-300 mb-4 shadow-md hover:shadow-lg"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-white rounded-xl shadow-sm">
-                      <Sparkles className="w-5 h-5 text-purple-600" />
+                    <div className="p-2 bg-white dark:bg-slate-700 rounded-xl shadow-sm">
+                      <Sparkles className="w-5 h-5 text-purple-600 dark:text-violet-400" />
                     </div>
-                    <span className="text-lg font-bold text-purple-800">
+                    <span className="text-lg font-bold text-purple-800 dark:text-violet-200">
                       {isExpanded ? '🔽 Hide Summary' : '🔍 View Summary'}
                     </span>
                   </div>
                   {isExpanded ? (
-                    <ChevronUp className="w-6 h-6 text-purple-600 transform transition-transform duration-300" />
+                    <ChevronUp className="w-6 h-6 text-purple-600 dark:text-violet-400 transform transition-transform duration-300" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-purple-600 transform transition-transform duration-300" />
+                    <ChevronDown className="w-6 h-6 text-purple-600 dark:text-violet-400 transform transition-transform duration-300" />
                   )}
                 </button>
 
                 {/* Collapsible Summary Content */}
                 {isExpanded && (
-                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 shadow-inner animate-slide-up">
+                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl p-6 shadow-inner animate-slide-up">
                     <div className="prose prose-lg max-w-none">
                       {file.summary?.split('\n').map((paragraph, index) => (
-                        <p key={index} className="mb-4 text-gray-800 leading-relaxed font-medium">
+                        <p key={index} className="mb-4 text-gray-800 dark:text-slate-200 leading-relaxed font-medium">
                           {paragraph}
                         </p>
                       ))}

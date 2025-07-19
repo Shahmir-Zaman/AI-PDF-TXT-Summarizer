@@ -49,25 +49,25 @@ export const FileUploadInterface: React.FC = () => {
       {/* Upload Zone */}
       {canAddMoreFiles && (
         <div
-          className="border-3 border-dashed border-purple-300 rounded-2xl p-9 text-center hover:border-pink-400 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 transition-all duration-300 cursor-pointer bg-white bg-opacity-90 backdrop-blur-sm shadow-lg hover:shadow-2xl transform hover:scale-105 animate-slide-up"
+          className="border-3 border-dashed border-purple-300 dark:border-violet-500 rounded-2xl p-9 text-center hover:border-pink-400 dark:hover:border-pink-400 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 dark:hover:from-slate-800 dark:hover:to-violet-800 transition-all duration-300 cursor-pointer bg-white dark:bg-slate-800 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm shadow-lg hover:shadow-2xl transform hover:scale-105 animate-slide-up"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={handleClick}
         >
-          <Upload className="w-15 h-15 text-purple-500 mx-auto mb-5 animate-bounce" />
-          <h3 className="text-xl font-bold text-gray-800 mb-3">
+          <Upload className="w-15 h-15 text-purple-500 dark:text-purple-400 mx-auto mb-5 animate-bounce" />
+          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-3">
             🎯 Drop your files here or click to browse
           </h3>
-          <p className="text-purple-600 mb-5 text-base font-medium">
+          <p className="text-purple-600 dark:text-purple-400 mb-5 text-base font-medium">
             Select up to 3 files (PDF or TXT) • Max {3 - files.length} more files ✨
           </p>
-          <div className="flex items-center justify-center space-x-5 text-sm text-gray-600">
-            <div className="flex items-center space-x-2 bg-purple-100 px-3 py-2 rounded-full">
-              <FileText className="w-4 h-4 text-purple-600" />
+          <div className="flex items-center justify-center space-x-5 text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center space-x-2 bg-purple-100 dark:bg-purple-800 px-3 py-2 rounded-full">
+              <FileText className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               <span className="font-semibold">PDF</span>
             </div>
-            <div className="flex items-center space-x-2 bg-pink-100 px-3 py-2 rounded-full">
-              <FileText className="w-4 h-4 text-pink-600" />
+            <div className="flex items-center space-x-2 bg-pink-100 dark:bg-pink-800 px-3 py-2 rounded-full">
+              <FileText className="w-4 h-4 text-pink-600 dark:text-pink-400" />
               <span className="font-semibold">TXT</span>
             </div>
           </div>
@@ -76,9 +76,9 @@ export const FileUploadInterface: React.FC = () => {
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-3">
-          <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-          <p className="text-red-700">{error}</p>
+        <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded-lg p-4 flex items-center space-x-3">
+          <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0" />
+          <p className="text-red-700 dark:text-red-300">{error}</p>
         </div>
       )}
 
@@ -120,11 +120,11 @@ export const FileUploadInterface: React.FC = () => {
 
           {isUploading && (
             <div className="text-center animate-pulse">
-              <div className="inline-flex items-center space-x-2 bg-white bg-opacity-90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg">
-                <div className="w-4 h-4 bg-purple-500 rounded-full animate-bounce"></div>
-                <div className="w-4 h-4 bg-pink-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                <div className="w-4 h-4 bg-red-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                <p className="text-gray-700 font-semibold ml-3">
+              <div className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg">
+                <div className="w-4 h-4 bg-purple-500 dark:bg-purple-400 rounded-full animate-bounce"></div>
+                <div className="w-4 h-4 bg-pink-500 dark:bg-pink-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                <div className="w-4 h-4 bg-red-500 dark:bg-red-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                <p className="text-gray-700 dark:text-gray-300 font-semibold ml-3">
                   ✨ AI is working its magic... This may take a few minutes! 🎭
                 </p>
               </div>

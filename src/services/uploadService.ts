@@ -124,24 +124,53 @@ export const uploadFile = async (
       dispatch({ type: 'UPDATE_FILE_STATUS', payload: { id, status: 'uploaded' } });
       dispatch({ type: 'UPDATE_FILE_STATUS', payload: { id, status: 'processing' } });
 
-      // Try to parse JSON summary format: [{"text": "summary..."}]
-      try {
-        const jsonResponse = JSON.parse(responseText);
-        console.log(`[DEBUG] Successfully parsed JSON response for file ${id}`);
-        console.log(`[DEBUG] JSON structure:`, typeof jsonResponse, Array.isArray(jsonResponse));
+      let extractedSummary = '';
 
-        if (Array.isArray(jsonResponse) && jsonResponse.length > 0 && jsonResponse[0].text) {
-          console.log(`[DEBUG] Found summary in expected JSON format for file ${id}`);
-          console.log(`[DEBUG] Summary length: ${jsonResponse[0].text.length} characters`);
-          dispatch({ type: 'SET_FILE_SUMMARY', payload: { id, summary: jsonResponse[0].text } });
+      // Check if response contains HTML/iframe content
+      if (responseText.includes('<iframe') && responseText.includes('srcdoc=')) {
+        console.log(`[DEBUG] Detected HTML iframe response, extracting srcdoc content for file ${id}`);
+        
+        // Extract content from srcdoc attribute
+        const srcdocMatch = responseText.match(/srcdoc="([^"]*?)"/);
+        if (srcdocMatch && srcdocMatch[1]) {
+          // Decode HTML entities and clean up the content
+          extractedSummary = srcdocMatch[1]
+            .replace(/&quot;/g, '"')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&#x27;/g, "'")
+            .replace(/&#x2F;/g, '/')
+            .trim();
+          
+          console.log(`[DEBUG] Extracted summary from iframe srcdoc for file ${id}`);
+          console.log(`[DEBUG] Extracted summary length: ${extractedSummary.length} characters`);
         } else {
-          console.log(`[DEBUG] JSON not in expected format, treating as plain text for file ${id}`);
-          dispatch({ type: 'SET_FILE_SUMMARY', payload: { id, summary: responseText.trim() } });
+          console.log(`[DEBUG] Could not extract srcdoc content, using full response for file ${id}`);
+          extractedSummary = responseText.trim();
         }
-      } catch (parseError) {
-        console.log(`[DEBUG] Failed to parse JSON, treating as plain text for file ${id}:`, parseError);
-        dispatch({ type: 'SET_FILE_SUMMARY', payload: { id, summary: responseText.trim() } });
+      } else {
+        // Try to parse JSON summary format: [{"text": "summary..."}]
+        try {
+          const jsonResponse = JSON.parse(responseText);
+          console.log(`[DEBUG] Successfully parsed JSON response for file ${id}`);
+          console.log(`[DEBUG] JSON structure:`, typeof jsonResponse, Array.isArray(jsonResponse));
+
+          if (Array.isArray(jsonResponse) && jsonResponse.length > 0 && jsonResponse[0].text) {
+            console.log(`[DEBUG] Found summary in expected JSON format for file ${id}`);
+            console.log(`[DEBUG] Summary length: ${jsonResponse[0].text.length} characters`);
+            extractedSummary = jsonResponse[0].text;
+          } else {
+            console.log(`[DEBUG] JSON not in expected format, treating as plain text for file ${id}`);
+            extractedSummary = responseText.trim();
+          }
+        } catch (parseError) {
+          console.log(`[DEBUG] Failed to parse JSON, treating as plain text for file ${id}:`, parseError);
+          extractedSummary = responseText.trim();
+        }
       }
+
+      dispatch({ type: 'SET_FILE_SUMMARY', payload: { id, summary: extractedSummary } });
       return;
     }
 
@@ -151,7 +180,29 @@ export const uploadFile = async (
       console.log(`[DEBUG] Plain text response: "${responseText.trim()}"`);
       dispatch({ type: 'UPDATE_FILE_STATUS', payload: { id, status: 'uploaded' } });
       dispatch({ type: 'UPDATE_FILE_STATUS', payload: { id, status: 'processing' } });
-      dispatch({ type: 'SET_FILE_SUMMARY', payload: { id, summary: responseText.trim() } });
+      
+      let cleanedSummary = responseText.trim();
+      
+      // Check if this plain text also contains HTML/iframe content
+      if (cleanedSummary.includes('<iframe') && cleanedSummary.includes('srcdoc=')) {
+        console.log(`[DEBUG] Plain text also contains iframe, extracting srcdoc content for file ${id}`);
+        
+        const srcdocMatch = cleanedSummary.match(/srcdoc="([^"]*?)"/);
+        if (srcdocMatch && srcdocMatch[1]) {
+          cleanedSummary = srcdocMatch[1]
+            .replace(/&quot;/g, '"')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&#x27;/g, "'")
+            .replace(/&#x2F;/g, '/')
+            .trim();
+          
+          console.log(`[DEBUG] Extracted clean summary from plain text iframe for file ${id}`);
+        }
+      }
+      
+      dispatch({ type: 'SET_FILE_SUMMARY', payload: { id, summary: cleanedSummary } });
       return;
     }
 
